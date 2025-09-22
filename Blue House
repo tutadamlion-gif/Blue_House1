@@ -1,53 +1,120 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import Home from "./pages/Home";
-import Interior from "./pages/Interior";
-import Exterior from "./pages/Exterior";
-import Lighting from "./pages/Lighting";
-import Rentals from "./pages/Rentals";
-import Construction from "./pages/Construction";
-import Contact from "./pages/Contact";
+import React, { useRef } from "react";
 import Footer from "./components/Footer";
 
+const sections = [
+  { id: "home", label: "الرئيسية" },
+  { id: "interior", label: "الديكور الداخلي" },
+  { id: "exterior", label: "الديكور الخارجي" },
+  { id: "lighting", label: "الإضاءة والمرافق" },
+  { id: "rentals", label: "الإيجارات" },
+  { id: "construction", label: "البناء" },
+  { id: "contact", label: "تواصل معنا" },
+];
+
 export default function App() {
+  // مراجع السكاشن للتنقل السلس
+  const refs = sections.reduce((acc, section) => {
+    acc[section.id] = useRef(null);
+    return acc;
+  }, {});
+
+  // دالة التنقل السلس
+  const scrollToSection = (id) => {
+    refs[id].current?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
-    <Router>
-      <div className="min-h-screen bg-slate-50 text-slate-900" dir="rtl">
-        <header className="bg-white shadow-md sticky top-0 z-40">
-          <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-700 rounded-2xl flex items-center justify-center text-white font-extrabold text-lg">BH</div>
-              <div>
-                <h1 className="text-xl font-bold">مكتب Blue House</h1>
-                <p className="text-xs text-slate-500">العقار — التصميم — البناء — التأجير</p>
-              </div>
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-100 text-slate-900" dir="rtl">
+      {/* الهيدر العصري */}
+      <header className="bg-white/90 backdrop-blur shadow-md sticky top-0 z-40">
+        <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-indigo-700 rounded-3xl flex items-center justify-center text-white font-extrabold text-2xl shadow-lg">BH</div>
+            <div>
+              <h1 className="text-2xl font-bold">مكتب Blue House</h1>
+              <p className="text-sm text-slate-500">العقار — التصميم — البناء — التأجير</p>
             </div>
-            <nav className="flex items-center gap-3">
-              <Link to="/" className="px-4 py-2 rounded-2xl font-semibold hover:shadow-lg">الرئيسية</Link>
-              <Link to="/interior" className="px-4 py-2 rounded-2xl font-semibold hover:shadow-lg">الديكور الداخلي</Link>
-              <Link to="/exterior" className="px-4 py-2 rounded-2xl font-semibold hover:shadow-lg">الديكور الخارجي</Link>
-              <Link to="/lighting" className="px-4 py-2 rounded-2xl font-semibold hover:shadow-lg">الإضاءة والمرافق</Link>
-              <Link to="/rentals" className="px-4 py-2 rounded-2xl font-semibold hover:shadow-lg">الإيجارات</Link>
-              <Link to="/construction" className="px-4 py-2 rounded-2xl font-semibold hover:shadow-lg">البناء</Link>
-              <Link to="/contact" className="px-4 py-2 rounded-2xl font-semibold hover:shadow-lg">تواصل معنا</Link>
-            </nav>
           </div>
-        </header>
+          <nav className="flex items-center gap-3">
+            {sections.map((section) => (
+              <button
+                key={section.id}
+                onClick={() => scrollToSection(section.id)}
+                className="px-4 py-2 rounded-2xl font-semibold hover:bg-blue-100 hover:text-blue-800 transition"
+              >
+                {section.label}
+              </button>
+            ))}
+          </nav>
+        </div>
+      </header>
 
-        <main className="max-w-6xl mx-auto px-4 py-8">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/interior" element={<Interior />} />
-            <Route path="/exterior" element={<Exterior />} />
-            <Route path="/lighting" element={<Lighting />} />
-            <Route path="/rentals" element={<Rentals />} />
-            <Route path="/construction" element={<Construction />} />
-            <Route path="/contact" element={<Contact />} />
-          </Routes>
-        </main>
+      {/* كل الأقسام في صفحة واحدة مع تصميم عصري */}
+      <main className="max-w-6xl mx-auto px-4 py-10 space-y-24">
+        <section
+          ref={refs.home}
+          id="home"
+          className="rounded-3xl bg-white shadow-xl p-10 flex flex-col items-center gap-6"
+        >
+          <h2 className="text-3xl font-bold bg-gradient-to-r from-blue-600 via-indigo-500 to-blue-300 text-transparent bg-clip-text mb-2">مرحبا بكم في Blue House</h2>
+          <p className="text-lg text-slate-700 max-w-xl text-center">نحن مكتب متخصص في العقار، التصميم الداخلي والخارجي، الإضاءة والمرافق، البناء، والتأجير. نقدم لك أفضل الحلول العصرية والمبتكرة.</p>
+        </section>
 
-        <Footer />
-      </div>
-    </Router>
+        <section ref={refs.interior} id="interior" className="rounded-3xl bg-gradient-to-br from-blue-50 to-white shadow-lg p-10">
+          <h2 className="text-2xl font-bold mb-2 text-blue-800">الديكور الداخلي</h2>
+          <p className="text-slate-600">تصاميم داخلية راقية تناسب جميع الأذواق وتحقق الراحة والجمال لمنزلك أو مكتبك.</p>
+        </section>
+
+        <section ref={refs.exterior} id="exterior" className="rounded-3xl bg-gradient-to-br from-blue-100 via-white to-blue-50 shadow-lg p-10">
+          <h2 className="text-2xl font-bold mb-2 text-indigo-700">الديكور الخارجي</h2>
+          <p className="text-slate-600">تصميم واجهات خارجية عصرية وتنسيق الحدائق والمساحات الخارجية بأحدث الأساليب.</p>
+        </section>
+
+        <section ref={refs.lighting} id="lighting" className="rounded-3xl bg-white shadow-lg p-10">
+          <h2 className="text-2xl font-bold mb-2 text-blue-700">الإضاءة والمرافق</h2>
+          <p className="text-slate-600">حلول إضاءة مبتكرة ومرافق متكاملة توفر الطاقة وتزيد من جمالية المكان.</p>
+        </section>
+
+        <section ref={refs.rentals} id="rentals" className="rounded-3xl bg-gradient-to-br from-white to-blue-50 shadow-lg p-10">
+          <h2 className="text-2xl font-bold mb-2 text-blue-900">الإيجارات</h2>
+          <p className="text-slate-600">خدمات تأجير متميزة للعقارات والمباني مع ضمان الراحة والأمان.</p>
+        </section>
+
+        <section ref={refs.construction} id="construction" className="rounded-3xl bg-white shadow-lg p-10">
+          <h2 className="text-2xl font-bold mb-2 text-indigo-800">البناء</h2>
+          <p className="text-slate-600">فريق متخصص في أعمال البناء والتشييد بإشراف هندسي كامل وجودة عالية.</p>
+        </section>
+
+        <section ref={refs.contact} id="contact" className="rounded-3xl bg-gradient-to-br from-blue-50 to-white shadow-lg p-10">
+          <h2 className="text-2xl font-bold mb-2 text-blue-700">تواصل معنا</h2>
+          <p className="text-slate-600 mb-6">للاستفسار أو طلب خدمة، يرجى التواصل معنا عبر النموذج أو الهاتف.</p>
+          <form className="flex flex-col gap-4 max-w-md mx-auto">
+            <input
+              type="text"
+              placeholder="اسمك"
+              className="border rounded-xl px-4 py-2 focus:border-blue-400"
+            />
+            <input
+              type="email"
+              placeholder="بريدك الإلكتروني"
+              className="border rounded-xl px-4 py-2 focus:border-blue-400"
+            />
+            <textarea
+              placeholder="رسالتك"
+              className="border rounded-xl px-4 py-2 focus:border-blue-400"
+              rows={4}
+            />
+            <button
+              type="submit"
+              className="bg-blue-600 text-white px-6 py-2 rounded-2xl font-bold shadow hover:bg-blue-700 transition"
+            >
+              إرسال
+            </button>
+          </form>
+        </section>
+      </main>
+
+      <Footer />
+    </div>
   );
 }
