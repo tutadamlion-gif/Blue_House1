@@ -1,0 +1,313 @@
+import React, { useState } from "react";
+
+export default function BlueHouseWebsite() {
+  const [route, setRoute] = useState("home");
+
+  function NavButton({ id, label }) {
+    return (
+      <button
+        onClick={() => setRoute(id)}
+        className={`px-4 py-2 rounded-2xl text-sm md:text-base font-semibold transition-shadow hover:shadow-lg focus:outline-none ${
+          route === id ? "bg-blue-600 text-white" : "bg-white text-slate-800"
+        }`}
+      >
+        {label}
+      </button>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-slate-50 text-slate-900" dir="rtl">
+      <header className="bg-white shadow-md sticky top-0 z-40">
+        <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-700 rounded-2xl flex items-center justify-center text-white font-extrabold text-lg">BH</div>
+            <div>
+              <h1 className="text-xl font-bold">مكتب Blue House</h1>
+              <p className="text-xs text-slate-500">العقار — التصميم — البناء — التأجير</p>
+            </div>
+          </div>
+
+          <nav className="hidden md:flex items-center gap-3">
+            <NavButton id="home" label="الرئيسية" />
+            <NavButton id="interior" label="الديكور الداخلي" />
+            <NavButton id="exterior" label="الديكور الخارجي" />
+            <NavButton id="lighting" label="الإضاءة والمرافق" />
+            <NavButton id="rentals" label="الإيجارات" />
+            <NavButton id="construction" label="البناء" />
+            <NavButton id="contact" label="تواصل معنا" />
+          </nav>
+
+          <div className="md:hidden">
+            <select
+              value={route}
+              onChange={(e) => setRoute(e.target.value)}
+              className="px-3 py-2 rounded-lg border"
+            >
+              <option value="home">الرئيسية</option>
+              <option value="interior">الديكور الداخلي</option>
+              <option value="exterior">الديكور الخارجي</option>
+              <option value="lighting">الإضاءة والمرافق</option>
+              <option value="rentals">الإيجارات</option>
+              <option value="construction">البناء</option>
+              <option value="contact">تواصل معنا</option>
+            </select>
+          </div>
+        </div>
+      </header>
+
+      <main className="max-w-6xl mx-auto px-4 py-8">
+        {route === "home" && (
+          <section>
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div>
+                <h2 className="text-3xl md:text-4xl font-extrabold">مرحبا بكم في <span className="text-blue-600">Blue House</span></h2>
+                <p className="mt-4 text-lg text-slate-600">نقدّم خدمات متكاملة في الوساطة العقارية، الديكور الداخلي والخارجي، حلول الإضاءة، إدارة الإيجارات، وأعمال البناء والمشاريع الإنشائية — بتصميم عصري واحترافي يناسب احتياجاتكم.</p>
+
+                <div className="mt-6 flex gap-3 flex-wrap">
+                  <button onClick={() => setRoute('contact')} className="px-5 py-3 bg-blue-600 text-white rounded-2xl font-semibold">تواصل معنا</button>
+                  <button onClick={() => setRoute('rentals')} className="px-5 py-3 bg-white border rounded-2xl">شاهد الإيجارات</button>
+                </div>
+
+                <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 gap-4">
+                  <div className="p-4 bg-white rounded-xl shadow">
+                    <h3 className="font-semibold">الوساطة العقارية</h3>
+                    <p className="text-sm text-slate-500 mt-2">بيع وشراء وتأجير عقارات مع تقييم احترافي وسوق مستهدف.</p>
+                  </div>
+                  <div className="p-4 bg-white rounded-xl shadow">
+                    <h3 className="font-semibold">الديكور</h3>
+                    <p className="text-sm text-slate-500 mt-2">تصاميم داخلية وخارجية عصرية قابلة للتطبيق حسب ميزانيتك.</p>
+                  </div>
+                  <div className="p-4 bg-white rounded-xl shadow">
+                    <h3 className="font-semibold">البناء</h3>
+                    <p className="text-sm text-slate-500 mt-2">إدارة مشاريع بناء مع مقاوليين موثوقين وجودة عالية.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="rounded-2xl overflow-hidden shadow-lg bg-gradient-to-br from-slate-50 to-white p-6">
+                <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=900&q=60" alt="house" className="w-full h-64 object-cover rounded-lg" />
+                <div className="mt-4">
+                  <h4 className="font-bold">خدمات احترافية — نتائج ملموسة</h4>
+                  <p className="text-sm text-slate-500 mt-2">نستثمر خبرتنا لتقديم حلول متكاملة ترفع من قيمة ممتلكاتك وتضمن راحة العملاء.</p>
+                </div>
+              </div>
+            </div>
+
+            <section className="mt-12 grid md:grid-cols-3 gap-6">
+              <div className="bg-white rounded-xl p-6 shadow">
+                <h4 className="font-semibold">تقييم عقارات</h4>
+                <p className="text-sm text-slate-500 mt-2">تقرير مُفصّل عن حالة العقار وسعر السوق مع توصيات.</p>
+              </div>
+              <div className="bg-white rounded-xl p-6 shadow">
+                <h4 className="font-semibold">إدارة إيجارات</h4>
+                <p className="text-sm text-slate-500 mt-2">تتبع المستأجرين، تحصيل الإيجارات، وصيانة دورية.</p>
+              </div>
+              <div className="bg-white rounded-xl p-6 shadow">
+                <h4 className="font-semibold">استشارات تصميم</h4>
+                <p className="text-sm text-slate-500 mt-2">جلسة استشارية لتحديد الذوق، المواد، والميزانية.</p>
+              </div>
+            </section>
+          </section>
+        )}
+
+        {route === "interior" && (
+          <section>
+            <h2 className="text-2xl font-bold">الديكور الداخلي</h2>
+            <p className="mt-3 text-slate-600">نقدم باقات تصميم داخلي كاملة تشمل: تخطيط المساحات، اختيار الأثاث، الأقمشة، الألوان، والأكسسوارات مع نموذج ثلاثي الأبعاد (حين يطلب العميل).</p>
+
+            <div className="mt-6 grid md:grid-cols-2 gap-6">
+              <div className="bg-white p-6 rounded-xl shadow">
+                <h4 className="font-semibold">تصميم مودرن</h4>
+                <ul className="mt-3 list-disc list-inside text-sm text-slate-500">
+                  <li>تخطيط عملي للمساحات الصغيرة والكبيرة</li>
+                  <li>اختيار مواد متينة ومظهر أنيق</li>
+                  <li>تنسيق ألوان ومفروشات حسب شخصية العميل</li>
+                </ul>
+              </div>
+              <div className="bg-white p-6 rounded-xl shadow">
+                <h4 className="font-semibold">باقة تنفيذ</h4>
+                <p className="text-sm text-slate-500 mt-2">إدارة توريد الأثاث والإشراف على التنفيذ وتركيب الديكورات ضمن جدول زمني واضح.</p>
+              </div>
+            </div>
+
+            <div className="mt-6 grid sm:grid-cols-2 gap-4">
+              <div className="rounded-xl overflow-hidden shadow">
+                <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=60" alt="interior" className="w-full h-56 object-cover" />
+              </div>
+              <div className="rounded-xl overflow-hidden shadow">
+                <img src="https://images.unsplash.com/photo-1499925087520-5f5715a15f9a?auto=format&fit=crop&w=900&q=60" alt="interior2" className="w-full h-56 object-cover" />
+              </div>
+            </div>
+
+            <div className="mt-6 bg-white p-6 rounded-xl shadow">
+              <h4 className="font-semibold">خطوات العمل معنا</h4>
+              <ol className="list-decimal list-inside text-sm text-slate-500 mt-3">
+                <li>جلسة استماع وقياسات الموقع</li>
+                <li>تصميم مبدئي وموافقة العميل</li>
+                <li>تنفيذ ومتابعة الجودة</li>
+              </ol>
+            </div>
+          </section>
+        )}
+
+        {route === "exterior" && (
+          <section>
+            <h2 className="text-2xl font-bold">الديكور الخارجي والمناظر الطبيعية</h2>
+            <p className="mt-3 text-slate-600">تصاميم حدائق، واجهات مباني، مساحات استقبال خارجية، وإضاءة خارجية تعطي طابعًا أنيقًا وآمنًا للممتلكات.</p>
+
+            <div className="mt-6 grid md:grid-cols-3 gap-6">
+              <div className="bg-white p-6 rounded-xl shadow">
+                <h4 className="font-semibold">تصميم حدائق</h4>
+                <p className="text-sm text-slate-500 mt-2">اختيار نباتات محلية، مسارات، ونقاط جلوس.</p>
+              </div>
+              <div className="bg-white p-6 rounded-xl shadow">
+                <h4 className="font-semibold">واجهات مباني</h4>
+                <p className="text-sm text-slate-500 mt-2">اقتراح خامات وأنظمة مقاومة للعوامل الجوية.</p>
+              </div>
+              <div className="bg-white p-6 rounded-xl shadow">
+                <h4 className="font-semibold">الأمن والجمالية</h4>
+                <p className="text-sm text-slate-500 mt-2">تكامل العناصر الجمالية مع متطلبات الأمان والصيانة.</p>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {route === "lighting" && (
+          <section>
+            <h2 className="text-2xl font-bold">الإضاءة والمرافق</h2>
+            <p className="mt-3 text-slate-600">حلول إضاءة داخلية وخارجية موفرة للطاقة، أنظمة كهرباء متكاملة، وإنارة تصميمية تبرز جمال المكان ليلًا.</p>
+
+            <div className="mt-6 grid md:grid-cols-2 gap-6">
+              <div className="bg-white p-6 rounded-xl shadow">
+                <h4 className="font-semibold">إضاءة عملية</h4>
+                <p className="text-sm text-slate-500 mt-2">تركيز على الإضاءة المناسبة لكل منطقة: مطابخ، غرف معيشة، ممرّات.</p>
+              </div>
+              <div className="bg-white p-6 rounded-xl shadow">
+                <h4 className="font-semibold">إنارة خارجية</h4>
+                <p className="text-sm text-slate-500 mt-2">إضاءة للممرات، الحديقة، والواجهات مع حساسات توفير الطاقة.</p>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {route === "rentals" && (
+          <section>
+            <h2 className="text-2xl font-bold">عقارات للإيجار</h2>
+            <p className="mt-3 text-slate-600">قائمة محدثة من الشقق والمنازل المتاحة للإيجار — خدمة عرض احترافية مع صور ووصف وموقع.</p>
+
+            <div className="mt-6 grid md:grid-cols-2 gap-6">
+              {/* Example listing 1 */}
+              <div className="bg-white rounded-xl shadow overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=900&q=60" alt="listing" className="w-full h-48 object-cover" />
+                <div className="p-4">
+                  <h4 className="font-semibold">شقة 3 غرف في موقع مميز</h4>
+                  <p className="text-sm text-slate-500 mt-2">الإيجار: $350 / شهر — تحتوي على موقف سيارات، مطبخ مجهز، وقرب الخدمات.</p>
+                  <div className="mt-4 flex gap-2">
+                    <button className="px-3 py-2 rounded-lg bg-blue-600 text-white">اطلع التفاصيل</button>
+                    <button className="px-3 py-2 rounded-lg border">احجز معاينة</button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Example listing 2 */}
+              <div className="bg-white rounded-xl shadow overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=900&q=60" alt="listing2" className="w-full h-48 object-cover" />
+                <div className="p-4">
+                  <h4 className="font-semibold">منزل عائلي واسع</h4>
+                  <p className="text-sm text-slate-500 mt-2">الإيجار: $600 / شهر — 4 غرف، حديقة خلفية، وإمكانية التفاوض على مدة العقد.</p>
+                  <div className="mt-4 flex gap-2">
+                    <button className="px-3 py-2 rounded-lg bg-blue-600 text-white">اطلع التفاصيل</button>
+                    <button className="px-3 py-2 rounded-lg border">احجز معاينة</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-6 bg-white p-6 rounded-xl shadow">
+              <h4 className="font-semibold">خدمة إدارة العقار</h4>
+              <p className="text-sm text-slate-500 mt-2">نقدّم عقود إدارة واضحة، تحصيل إيجارات، وتقارير دورية لمالكي العقارات.</p>
+            </div>
+          </section>
+        )}
+
+        {route === "construction" && (
+          <section>
+            <h2 className="text-2xl font-bold">أعمال البناء والمقاولات</h2>
+            <p className="mt-3 text-slate-600">نقوم بتنسيق مشاريع بناء صغيرة ومتوسطة من التخطيط إلى التسليم مع فرق عمل مختصة ومراقبة جودة صارمة.</p>
+
+            <div className="mt-6 grid md:grid-cols-2 gap-6">
+              <div className="bg-white p-6 rounded-xl shadow">
+                <h4 className="font-semibold">خدماتنا في البناء</h4>
+                <ul className="mt-3 list-disc list-inside text-sm text-slate-500">
+                  <li>الاستشارات الهندسية وبناء الموازنات</li>
+                  <li>إدارة المقاولين والمواد</li>
+                  <li>متابعة الجداول الزمنية ومعايير السلامة</li>
+                </ul>
+              </div>
+              <div className="bg-white p-6 rounded-xl shadow">
+                <h4 className="font-semibold">نماذج عقود</h4>
+                <p className="text-sm text-slate-500 mt-2">نعدّ عقودًا واضحة للمالك والمقاول مع بنود لتسليم العمل وضمان الجودة.</p>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {route === "contact" && (
+          <section>
+            <h2 className="text-2xl font-bold">تواصل معنا</h2>
+            <p className="mt-3 text-slate-600">سنكون سعداء بالإجابة عن استفساراتكم أو تحديد موعد معاينة.</p>
+
+            <div className="mt-6 grid md:grid-cols-2 gap-6">
+              <form className="bg-white p-6 rounded-xl shadow" onSubmit={(e)=>{e.preventDefault(); alert('تم إرسال النموذج (محاكاة)؛ تواصل معنا عبر الهاتف أو الواتساب');}}>
+                <label className="block text-sm font-medium">الاسم</label>
+                <input className="w-full mt-2 p-2 border rounded-md" placeholder="اسمك" />
+
+                <label className="block text-sm font-medium mt-4">الهاتف أو الواتساب</label>
+                <input className="w-full mt-2 p-2 border rounded-md" placeholder="مثال: 0910XXXXXX" />
+
+                <label className="block text-sm font-medium mt-4">الرسالة</label>
+                <textarea className="w-full mt-2 p-2 border rounded-md" rows="4" placeholder="اكتب سؤالك أو طلبك"></textarea>
+
+                <div className="mt-4 flex gap-2">
+                  <button type="submit" className="px-4 py-2 rounded-lg bg-blue-600 text-white">أرسل</button>
+                  <button type="button" onClick={()=>{navigator.clipboard?.writeText('0910399086'); alert('تم نسخ رقم الهاتف');}} className="px-4 py-2 rounded-lg border">انسخ رقمنا</button>
+                </div>
+              </form>
+
+              <div className="bg-white p-6 rounded-xl shadow">
+                <h4 className="font-semibold">موقعنا ومعلومات الاتصال</h4>
+                <p className="text-sm text-slate-500 mt-2">العنوان: شارع رئيسي، المدينة — (مثال). الهاتف: 0910399086 — البريد: info@bluehouse.example</p>
+
+                <div className="mt-4">
+                  <h5 className="font-semibold text-sm">ساعات العمل</h5>
+                  <p className="text-sm text-slate-500">السبت — الخميس: 9 صباحًا — 6 مساءً</p>
+                </div>
+
+                <div className="mt-4">
+                  <h5 className="font-semibold text-sm">خدمات إضافية</h5>
+                  <ul className="list-disc list-inside text-sm text-slate-500">
+                    <li>تسويق إلكتروني للعقارات</li>
+                    <li>جلسات تصوير احترافية للعقارات</li>
+                    <li>تقييم وإعداد عقود قانونية</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+      </main>
+
+      <footer className="bg-white border-t mt-12">
+        <div className="max-w-6xl mx-auto px-4 py-6 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-sm text-slate-500">© {new Date().getFullYear()} Blue House — كل الحقوق محفوظة</p>
+          <div className="flex gap-3">
+            <a className="text-sm">فيسبوك</a>
+            <a className="text-sm">واتساب</a>
+            <a className="text-sm">انستجرام</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
