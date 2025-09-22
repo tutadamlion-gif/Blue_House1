@@ -1,154 +1,53 @@
-import React, { useState } from "react";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import Home from "./pages/Home";
+import Interior from "./pages/Interior";
+import Exterior from "./pages/Exterior";
+import Lighting from "./pages/Lighting";
+import Rentals from "./pages/Rentals";
+import Construction from "./pages/Construction";
+import Contact from "./pages/Contact";
+import Footer from "./components/Footer";
 
-export default function BlueHouseWebsite() {
-  const [route, setRoute] = useState("home");
-
-  function NavButton({ id, label }) {
-    return (
-      <button
-        onClick={() => setRoute(id)}
-        className={`px-4 py-2 rounded-xl text-sm md:text-base font-semibold transition hover:scale-105 focus:outline-none ${
-          route === id ? "bg-blue-700 text-white shadow" : "bg-white text-slate-800 border"
-        }`}
-      >
-        {label}
-      </button>
-    );
-  }
-
+export default function App() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100 text-slate-900 font-sans" dir="rtl">
-      <header className="bg-white/80 backdrop-blur-md border-b sticky top-0 z-40">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-800 rounded-2xl flex items-center justify-center text-white font-extrabold text-lg shadow-md">BH</div>
-            <div>
-              <h1 className="text-xl font-bold text-blue-700">Blue House</h1>
-              <p className="text-xs text-slate-500">العقار — التصميم — البناء — الإيجارات</p>
-            </div>
-          </div>
-
-          <nav className="hidden md:flex items-center gap-3">
-            <NavButton id="home" label="الرئيسية" />
-            <NavButton id="interior" label="الديكور الداخلي" />
-            <NavButton id="exterior" label="الديكور الخارجي" />
-            <NavButton id="lighting" label="الإضاءة" />
-            <NavButton id="rentals" label="الإيجارات" />
-            <NavButton id="construction" label="البناء" />
-            <NavButton id="contact" label="تواصل معنا" />
-          </nav>
-
-          <div className="md:hidden">
-            <select
-              value={route}
-              onChange={(e) => setRoute(e.target.value)}
-              className="px-3 py-2 rounded-lg border text-sm"
-            >
-              <option value="home">الرئيسية</option>
-              <option value="interior">الديكور الداخلي</option>
-              <option value="exterior">الديكور الخارجي</option>
-              <option value="lighting">الإضاءة</option>
-              <option value="rentals">الإيجارات</option>
-              <option value="construction">البناء</option>
-              <option value="contact">تواصل معنا</option>
-            </select>
-          </div>
-        </div>
-      </header>
-
-      <main className="max-w-7xl mx-auto px-4 py-10">
-        {route === "home" && (
-          <section className="text-center md:text-right">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-blue-700">مرحباً بكم في Blue House</h2>
-            <p className="mt-4 text-lg text-slate-600 max-w-2xl mx-auto md:mx-0">نوفر لكم خدمات متكاملة في العقارات، الديكور الداخلي والخارجي، الإضاءة، الإيجارات، وأعمال البناء مع لمسة عصرية واحترافية.</p>
-            <div className="mt-6 flex gap-3 justify-center md:justify-start flex-wrap">
-              <button onClick={() => setRoute('contact')} className="px-6 py-3 bg-blue-700 text-white rounded-xl font-semibold shadow hover:scale-105">تواصل معنا</button>
-              <button onClick={() => setRoute('rentals')} className="px-6 py-3 bg-white border rounded-xl hover:bg-slate-100">شاهد الإيجارات</button>
-            </div>
-
-            <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              <div className="p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition">
-                <h3 className="font-semibold text-blue-700">الوساطة العقارية</h3>
-                <p className="text-sm text-slate-500 mt-2">بيع وشراء وتأجير عقارات مع تقييم احترافي.</p>
-              </div>
-              <div className="p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition">
-                <h3 className="font-semibold text-blue-700">الديكور</h3>
-                <p className="text-sm text-slate-500 mt-2">تصاميم داخلية وخارجية حديثة قابلة للتنفيذ.</p>
-              </div>
-              <div className="p-6 bg-white rounded-xl shadow-md hover:shadow-lg transition">
-                <h3 className="font-semibold text-blue-700">البناء</h3>
-                <p className="text-sm text-slate-500 mt-2">مشاريع بناء مدروسة مع متابعة الجودة والتسليم.</p>
+    <Router>
+      <div className="min-h-screen bg-slate-50 text-slate-900" dir="rtl">
+        <header className="bg-white shadow-md sticky top-0 z-40">
+          <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-700 rounded-2xl flex items-center justify-center text-white font-extrabold text-lg">BH</div>
+              <div>
+                <h1 className="text-xl font-bold">مكتب Blue House</h1>
+                <p className="text-xs text-slate-500">العقار — التصميم — البناء — التأجير</p>
               </div>
             </div>
-          </section>
-        )}
-
-        {route === "interior" && (
-          <section>
-            <h2 className="text-2xl font-bold text-blue-700">الديكور الداخلي</h2>
-            <p className="mt-3 text-slate-600">تصاميم عصرية مميزة للمساحات الداخلية — تخطيط، أثاث، ألوان وإكسسوارات تناسب ذوقك.</p>
-          </section>
-        )}
-
-        {route === "exterior" && (
-          <section>
-            <h2 className="text-2xl font-bold text-blue-700">الديكور الخارجي</h2>
-            <p className="mt-3 text-slate-600">واجهات حديثة، حدائق منظمة، ومساحات خارجية عملية مع لمسة جمالية.</p>
-          </section>
-        )}
-
-        {route === "lighting" && (
-          <section>
-            <h2 className="text-2xl font-bold text-blue-700">الإضاءة</h2>
-            <p className="mt-3 text-slate-600">حلول إضاءة مبتكرة داخلية وخارجية تعكس جمال المكان وتوفر الطاقة.</p>
-          </section>
-        )}
-
-        {route === "rentals" && (
-          <section>
-            <h2 className="text-2xl font-bold text-blue-700">الإيجارات</h2>
-            <p className="mt-3 text-slate-600">عقارات مميزة للإيجار — شقق ومنازل بمواصفات مختلفة لتناسب الجميع.</p>
-          </section>
-        )}
-
-        {route === "construction" && (
-          <section>
-            <h2 className="text-2xl font-bold text-blue-700">أعمال البناء</h2>
-            <p className="mt-3 text-slate-600">تنفيذ مشاريع بناء باحترافية عالية — من التخطيط حتى التسليم.</p>
-          </section>
-        )}
-
-        {route === "contact" && (
-          <section>
-            <h2 className="text-2xl font-bold text-blue-700">تواصل معنا</h2>
-            <p className="mt-3 text-slate-600">للاستفسار أو حجز موعد، تواصل معنا مباشرة عبر الهاتف أو البريد.</p>
-
-            <form className="mt-6 bg-white p-6 rounded-xl shadow-md max-w-md" onSubmit={(e)=>{e.preventDefault(); alert('تم إرسال النموذج بنجاح (محاكاة)');}}>
-              <label className="block text-sm font-medium">الاسم</label>
-              <input className="w-full mt-2 p-2 border rounded-md" placeholder="اسمك" />
-
-              <label className="block text-sm font-medium mt-4">الهاتف</label>
-              <input className="w-full mt-2 p-2 border rounded-md" placeholder="مثال: 0910XXXXXX" />
-
-              <label className="block text-sm font-medium mt-4">الرسالة</label>
-              <textarea className="w-full mt-2 p-2 border rounded-md" rows="3" placeholder="اكتب سؤالك"></textarea>
-
-              <button type="submit" className="mt-4 px-5 py-2 bg-blue-700 text-white rounded-xl font-semibold hover:scale-105">إرسال</button>
-            </form>
-          </section>
-        )}
-      </main>
-
-      <footer className="bg-white border-t mt-12">
-        <div className="max-w-7xl mx-auto px-4 py-6 flex flex-col md:flex-row justify-between items-center gap-3">
-          <p className="text-sm text-slate-500">© {new Date().getFullYear()} Blue House — جميع الحقوق محفوظة</p>
-          <div className="flex gap-4 text-sm text-blue-700">
-            <a href="#">فيسبوك</a>
-            <a href="#">واتساب</a>
-            <a href="#">انستجرام</a>
+            <nav className="flex items-center gap-3">
+              <Link to="/" className="px-4 py-2 rounded-2xl font-semibold hover:shadow-lg">الرئيسية</Link>
+              <Link to="/interior" className="px-4 py-2 rounded-2xl font-semibold hover:shadow-lg">الديكور الداخلي</Link>
+              <Link to="/exterior" className="px-4 py-2 rounded-2xl font-semibold hover:shadow-lg">الديكور الخارجي</Link>
+              <Link to="/lighting" className="px-4 py-2 rounded-2xl font-semibold hover:shadow-lg">الإضاءة والمرافق</Link>
+              <Link to="/rentals" className="px-4 py-2 rounded-2xl font-semibold hover:shadow-lg">الإيجارات</Link>
+              <Link to="/construction" className="px-4 py-2 rounded-2xl font-semibold hover:shadow-lg">البناء</Link>
+              <Link to="/contact" className="px-4 py-2 rounded-2xl font-semibold hover:shadow-lg">تواصل معنا</Link>
+            </nav>
           </div>
-        </div>
-      </footer>
-    </div>
+        </header>
+
+        <main className="max-w-6xl mx-auto px-4 py-8">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/interior" element={<Interior />} />
+            <Route path="/exterior" element={<Exterior />} />
+            <Route path="/lighting" element={<Lighting />} />
+            <Route path="/rentals" element={<Rentals />} />
+            <Route path="/construction" element={<Construction />} />
+            <Route path="/contact" element={<Contact />} />
+          </Routes>
+        </main>
+
+        <Footer />
+      </div>
+    </Router>
   );
 }
